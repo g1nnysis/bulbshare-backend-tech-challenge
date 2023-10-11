@@ -1,6 +1,6 @@
-import { AggregatedResponse } from '../../modules/brief_analytics/dto'
+import { PollResponse } from '../../entities/poll_response.entity'
 import { FilterCriteria } from '../../modules/brief_analytics/schema'
 
 export interface PollResponseRepository {
-  aggregateMultiChoiceResponses(pollItemId: number, filterCriteria: FilterCriteria): Promise<AggregatedResponse>
+  getPollResponsesByCriteria(pollItemId: number, filterCriteria: FilterCriteria): Promise<PollResponse[]>
 }

@@ -13,6 +13,6 @@ export class BriefAnalyticsController {
 
   @Post('/brief/:briefId/average_completion')
   async calculateAverageCompletion(@Param('briefId') briefId: number) {
-    return this.briefAnalyticsService.calculateAverageCompletionTime(briefId)
+    return this.briefAnalyticsService.calculateAverageBriefCompletionTime(briefId)
   }
 }

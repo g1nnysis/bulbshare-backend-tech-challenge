@@ -1,7 +1,7 @@
 export interface FilterCriteria {
   age?: [number, number]
   gender?: string[]
-  country: number[]
+  country?: number[]
 }
 
 export interface AggregatedResponse {

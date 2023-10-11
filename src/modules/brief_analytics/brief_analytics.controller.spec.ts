@@ -44,7 +44,7 @@ describe('BriefAnalyticsController', () => {
     it('should call service method with correct parameters', async () => {
       const briefId = 1
 
-      const calculateAverageCompletionTimeSpy = jest.spyOn(service, 'calculateAverageCompletionTime')
+      const calculateAverageCompletionTimeSpy = jest.spyOn(service, 'calculateAverageBriefCompletionTime')
       await controller.calculateAverageCompletion(briefId)
 
       expect(calculateAverageCompletionTimeSpy).toHaveBeenCalledWith(briefId)

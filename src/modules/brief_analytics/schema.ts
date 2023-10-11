@@ -13,9 +13,9 @@ export class FilterCriteria implements FilterCriteriaDto {
   @IsString({ each: true })
   gender?: string[]
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsArray()
   @ArrayNotEmpty()
   @IsNumber({}, { each: true })
-  country: number[]
+  country?: number[]
 }

@@ -12,10 +12,6 @@ describe('BriefAnalyticsService', () => {
     service = module.get<BriefAnalyticsService>(BriefAnalyticsService)
   })
 
-  it('should be defined', () => {
-    expect(service).toBeDefined()
-  })
-
   describe('aggregateMultiChoiceResponses', () => {
     it('should return aggregated responses', async () => {
       const pollItemId = 1
@@ -31,7 +27,7 @@ describe('BriefAnalyticsService', () => {
     it('should return average completion time', async () => {
       const briefId = 1
 
-      const result = await service.calculateAverageCompletionTime(briefId)
+      const result = await service.calculateAverageBriefCompletionTime(briefId)
 
       expect(result).toEqual(0)
     })
