@@ -40,7 +40,7 @@ describe('Poll Response Repository', () => {
   })
 
   describe('getPollResponsesByCriteria', () => {
-    it('should get poll responses by criteria', async () => {
+    it('should get poll responses and filter by criteria', async () => {
       await briefRepository.save({
         id: 1,
         name: 'test_brief',
@@ -58,7 +58,8 @@ describe('Poll Response Repository', () => {
         id: 2,
         name: 'test_user',
         age: 30,
-        country_id: 1,
+        country_id: 2,
+        gender: 'male',
       })
 
       await pollItemRepository.save({
@@ -77,7 +78,7 @@ describe('Poll Response Repository', () => {
         end_time: new Date(),
       })
 
-      const result = await pollResponseRepository.getPollResponsesByCriteria(1, { age: [15, 20] })
+      const result = await pollResponseRepository.getPollResponsesByCriteria(1, { age: [15, 20], country: [1], gender: ['female'] })
 
       expect(result.length).toEqual(1)
       expect(_.omit(result[0], ['start_time', 'end_time'])).toEqual({
