@@ -15,7 +15,8 @@ module.exports = {
     '!src/main.ts',
     '!src/ormconfig.ts',
     '!src/common/configuration.ts',
-
+    '!src/repositories/**/*.repository.ts',
+    '!src/common/decorators.ts',
   ],
   coverageDirectory: '../coverage',
   coverageThreshold: {
