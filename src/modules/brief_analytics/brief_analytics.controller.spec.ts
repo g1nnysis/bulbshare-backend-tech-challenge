@@ -13,7 +13,7 @@ describe('BriefAnalyticsController', () => {
     provide: BriefAnalyticsService,
     useFactory: (): unknown => ({
       aggregateMultiChoiceResponses: jest.fn(),
-      calculateAverageCompletionTime: jest.fn(),
+      calculateAverageBriefCompletionTime: jest.fn(),
     }),
   }
 
@@ -45,6 +45,7 @@ describe('BriefAnalyticsController', () => {
       const briefId = 1
 
       const calculateAverageCompletionTimeSpy = jest.spyOn(service, 'calculateAverageBriefCompletionTime')
+
       await controller.calculateAverageCompletion(briefId)
 
       expect(calculateAverageCompletionTimeSpy).toHaveBeenCalledWith(briefId)
