@@ -1,6 +1,6 @@
 import { IsAgeValid } from '../../common/decorators'
 import { FilterCriteria as FilterCriteriaDto } from './dto'
-import { ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
+import { ArrayNotEmpty, IsArray, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class FilterCriteria implements FilterCriteriaDto {
   @IsOptional()

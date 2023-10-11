@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm'
 import { User } from './user.entity'
 import { PollItem } from './poll_item.entity'
 import { PollResponseOption } from './poll_response_option.entity'
-import { Brief } from './brief.entity'
 
 @Entity('poll_response')
 export class PollResponse {

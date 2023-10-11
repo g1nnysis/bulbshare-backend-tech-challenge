@@ -1,9 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { DataSource, Repository } from 'typeorm'
-import { PollResponseRepository } from './interfaces/poll_response_repository'
-import { FilterCriteria } from '../modules/brief_analytics/schema'
-import { PollResponse } from '../entities/poll_response.entity'
-import { PollItemType } from '../common/enums'
 import { PollResponseOption } from '../entities/poll_response_option.entity'
 import { PollResponseOptionRepository } from './interfaces/poll_response_option'
 

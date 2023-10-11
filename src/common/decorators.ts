@@ -9,7 +9,7 @@ export function IsAgeValid(validationOptions?: ValidationOptions) {
       constraints: [],
       options: validationOptions,
       validator: {
-        validate(value: any, args: ValidationArguments) {
+        validate(value: any, _args: ValidationArguments) {
           if (!value || !Array.isArray(value) || value.length !== 2) {
             return false
           }
@@ -17,7 +17,7 @@ export function IsAgeValid(validationOptions?: ValidationOptions) {
           const [start, end] = value
           return isNumber(start) && isNumber(end) && isPositive(start) && isPositive(end) && start >= end
         },
-        defaultMessage(validationArguments?: ValidationArguments) {
+        defaultMessage(_validationArguments?: ValidationArguments) {
           return 'The first element of age should be greater than or equal to the second element.'
         },
       },

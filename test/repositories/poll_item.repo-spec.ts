@@ -9,7 +9,6 @@ import { PollResponseOption } from '../../src/entities/poll_response_option.enti
 import { PollItemTypeOrmRepository } from '../../src/repositories/poll_item.repository'
 import { Brief } from '../../src/entities/brief.entity'
 import { PollItemType } from '../../src/common/enums'
-import * as _ from 'lodash'
 import { clearDatabase } from '../common-helpers'
 import { PollItemNotFound } from '../../src/common/exceptions'
 import { buildBrief } from '../builders/brief.builder'

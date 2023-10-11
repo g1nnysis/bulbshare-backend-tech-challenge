@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, OneToMany, Column } from 'typeorm'
 import { PollItem } from './poll_item.entity'
 
 @Entity('brief')

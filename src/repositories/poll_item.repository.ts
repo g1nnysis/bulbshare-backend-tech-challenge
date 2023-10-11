@@ -1,11 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { DataSource, Repository } from 'typeorm'
-import { Brief } from '../entities/brief.entity'
 import { PollItemRepository } from './interfaces/poll_item_repository'
-import { mockObject } from '../../test/common-helpers'
 import { PollItem } from '../entities/poll_item.entity'
-import { groupBy } from 'rxjs'
-import { PollResponse } from '../entities/poll_response.entity'
 import { PollItemNotFound } from '../common/exceptions'
 
 @Injectable()

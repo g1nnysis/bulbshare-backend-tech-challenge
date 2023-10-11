@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { PollItem } from '../../entities/poll_item.entity'
-import { Brief } from '../../entities/brief.entity'
 import { BriefAnalyticsController } from './brief_analytics.controller'
 import { BriefAnalyticsService } from './brief_analytics.service'
 import { PollResponse } from '../../entities/poll_response.entity'
