@@ -13,6 +13,7 @@ import * as responseAggregator from './utils/response_aggregator'
 import * as completionTimeCalculator from './utils/completion_time_calculator'
 import { AggregatedResponse } from './dto'
 import { PollItemType } from '../../common/enums'
+import { IncompatiblePollItemType } from '../../common/exceptions'
 
 describe('BriefAnalyticsService', () => {
   let service: BriefAnalyticsService
@@ -76,6 +77,18 @@ describe('BriefAnalyticsService', () => {
       const result = await service.aggregateMultiChoiceResponses(pollItemId, filterCriteria)
 
       expect(result).toEqual(expectedResult)
+    })
+
+    it('should throw IncompatiblePollItemType if poll item type is not multichoice', async () => {
+      const pollItemId = 1
+      const filterCriteria = { age: [18, 35], gender: ['male'], country: [1, 2] }
+      const pollItem: PollItem = mockObject()
+
+      const getById: jest.SpyInstance = jest.spyOn(pollItemRepository, 'getById')
+
+      when(getById).expectCalledWith(pollItemId).mockReturnValueOnce(pollItem)
+
+      await expect(service.aggregateMultiChoiceResponses(pollItemId, filterCriteria)).rejects.toThrow(IncompatiblePollItemType)
     })
   })
 

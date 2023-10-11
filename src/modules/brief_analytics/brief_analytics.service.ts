@@ -13,6 +13,7 @@ import { PollItemType } from '../../common/enums'
 import { IncompatiblePollItemType } from '../../common/exceptions'
 import { PollResponseOption } from '../../entities/poll_response_option.entity'
 import { PollResponseOptionRepository } from '../../repositories/interfaces/poll_response_option'
+import { PollResponseOptionTypeOrmRepository } from '../../repositories/poll_response_option.repository'
 
 @Injectable()
 export class BriefAnalyticsService {
@@ -21,7 +22,7 @@ export class BriefAnalyticsService {
     private pollResponseRepository: PollResponseRepository,
     @InjectRepository(PollItemTypeOrmRepository)
     private pollItemRepository: PollItemRepository,
-    @InjectRepository(PollResponseTypeOrmRepository)
+    @InjectRepository(PollResponseOptionTypeOrmRepository)
     private pollResponseOptionRepository: PollResponseOptionRepository
   ) {}
 
@@ -32,6 +33,7 @@ export class BriefAnalyticsService {
       throw new IncompatiblePollItemType()
     }
 
+    console.log(this.pollResponseOptionRepository)
     const responses: PollResponse[] = await this.pollResponseRepository.getPollResponsesByCriteria(pollItemId, filterCriteria)
     const responseOptions: PollResponseOption[] = await this.pollResponseOptionRepository.getByPollItemId(pollItemId)
 
