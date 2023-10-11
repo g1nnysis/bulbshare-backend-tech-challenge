@@ -26,7 +26,7 @@ describe('Completion time calculator', () => {
   })
 
   it('should handle 0 responses for a brief', (): void => {
-    const result: number = service.calculateAverageCompletionTime([mockObject(), mockObject()])
+    const result: number = service.calculateAverageCompletionTime([mockObject({ pollResponses: [] }), mockObject({ pollResponses: [] })])
 
     expect(result).toEqual(0)
   })

@@ -33,7 +33,6 @@ export class BriefAnalyticsService {
       throw new IncompatiblePollItemType()
     }
 
-    console.log(this.pollResponseOptionRepository)
     const responses: PollResponse[] = await this.pollResponseRepository.getPollResponsesByCriteria(pollItemId, filterCriteria)
     const responseOptions: PollResponseOption[] = await this.pollResponseOptionRepository.getByPollItemId(pollItemId)
 

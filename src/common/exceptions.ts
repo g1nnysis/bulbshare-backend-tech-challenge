@@ -7,6 +7,7 @@ export class IncompatiblePollItemType extends HttpException {
   }
 }
 
+// istanbul ignore next - covered with repository tests
 export class PollItemNotFound extends NotFoundException {
   constructor() {
     super('ERR_POLL_ITEM_NOT_FOUND')
