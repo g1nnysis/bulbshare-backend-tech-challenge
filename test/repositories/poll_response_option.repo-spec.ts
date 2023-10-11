@@ -35,7 +35,7 @@ describe('Poll Response Option Repository', () => {
     await clearDatabase(dataSource.createQueryRunner())
   })
 
-  afterAll(async () => {
+  afterAll(() => {
     testModule.close()
   })
 

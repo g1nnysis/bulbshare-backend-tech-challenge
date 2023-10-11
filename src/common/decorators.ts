@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { registerDecorator, ValidationOptions, ValidationArguments, isNumber, isPositive } from 'class-validator'
 
 export function IsAgeValid(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: unknown, propertyName: string) {
     registerDecorator({
       name: 'isAgeValid',
       target: object.constructor,

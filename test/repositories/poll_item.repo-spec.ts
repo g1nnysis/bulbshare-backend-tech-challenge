@@ -41,7 +41,7 @@ describe('Poll Item Repository', () => {
     await clearDatabase(dataSource.createQueryRunner())
   })
 
-  afterAll(async () => {
+  afterAll(() => {
     testModule.close()
   })
 
