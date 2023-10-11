@@ -8,6 +8,9 @@ import { PollItemType } from '../../src/common/enums'
 import { PollResponseOptionTypeOrmRepository } from '../../src/repositories/poll_response_option.repository'
 import { PollResponseOption } from '../../src/entities/poll_response_option.entity'
 import { clearDatabase } from '../common-helpers'
+import { buildBrief } from '../builders/brief.builder'
+import { buildPollItem } from '../builders/poll_item.builder'
+import { buildPollResponseOption } from '../builders/poll_response_option.builder'
 
 describe('Poll Response Option Repository', () => {
   let testModule: TestingModule
@@ -38,29 +41,10 @@ describe('Poll Response Option Repository', () => {
 
   describe('getByPollItemId', () => {
     it('should get poll responses by criteria', async () => {
-      await briefRepository.save({
-        id: 1,
-        name: 'test_brief',
-      })
-
-      await pollItemRepository.save({
-        id: 1,
-        brief_id: 1,
-        type: PollItemType.MultiChoice,
-        question: 'Test question',
-      })
-
-      await pollResponseOptionRepository.save({
-        id: 1,
-        poll_item_id: 1,
-        option_value: 'Option A',
-      })
-
-      await pollResponseOptionRepository.save({
-        id: 2,
-        poll_item_id: 1,
-        option_value: 'Option B',
-      })
+      await briefRepository.save(buildBrief())
+      await pollItemRepository.save(buildPollItem({ type: PollItemType.MultiChoice }))
+      await pollResponseOptionRepository.save(buildPollResponseOption({ option_value: 'a' }))
+      await pollResponseOptionRepository.save(buildPollResponseOption({ id: 2, option_value: 'b' }))
 
       const result = await pollResponseOptionRepository.getByPollItemId(1)
 
@@ -69,12 +53,14 @@ describe('Poll Response Option Repository', () => {
         {
           id: 1,
           poll_item_id: 1,
-          option_value: 'Option A',
+          option_value: 'a',
+          content: 'Test response.',
         },
         {
           id: 2,
           poll_item_id: 1,
-          option_value: 'Option B',
+          option_value: 'b',
+          content: 'Test response.',
         },
       ])
     })

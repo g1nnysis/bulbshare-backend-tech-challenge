@@ -6,23 +6,23 @@ import { PollResponseOption } from './poll_response_option.entity'
 @Entity('poll_item')
 export class PollItem {
   @PrimaryGeneratedColumn()
-  id: number
+  id!: number
 
   @ManyToOne('brief', 'poll_item')
   @JoinColumn([{ name: 'brief_id', referencedColumnName: 'id' }])
-  brief: Brief
+  brief!: Brief
 
   @Column()
-  brief_id: number
+  brief_id!: number
 
   @Column({
     type: 'enum',
     enum: ['swipe', 'radio', 'multichoice', 'opentext'],
   })
-  type: string
+  type!: string
 
   @Column('text')
-  question: string
+  question!: string
 
   @OneToMany('poll_item', 'poll_response_option')
   responseOptions: PollResponseOption[]

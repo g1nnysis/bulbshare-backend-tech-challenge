@@ -5,16 +5,15 @@ export class InitialSchema1696871362358 implements MigrationInterface {
     await queryRunner.query(`
 		CREATE TABLE user (
 			id INT AUTO_INCREMENT PRIMARY KEY,
-			age INT,
-			gender VARCHAR(255),
-			country_id INT
+			age INT NOT NULL,
+			gender VARCHAR(255) NOT NULL,
+			country_id INT NOT NULL
 		);
 	`)
 
     await queryRunner.query(`
 		CREATE TABLE brief (
 		id INT AUTO_INCREMENT PRIMARY KEY,
-		channel_id INT,
 		parent_brief_id INT
 		);
 	`)
@@ -22,28 +21,29 @@ export class InitialSchema1696871362358 implements MigrationInterface {
     await queryRunner.query(`
 		CREATE TABLE poll_item (
 		id INT AUTO_INCREMENT PRIMARY KEY,
-		brief_id INT,
-		type ENUM('swipe', 'radio', 'multichoice', 'opentext'),
-		question TEXT
+		brief_id INT NOT NULL,
+		type ENUM('swipe', 'radio', 'multichoice', 'opentext') NOT NULL DEFAULT 'opentext',
+		question TEXT NOT NULL
 		);
 	`)
 
     await queryRunner.query(`
 		CREATE TABLE poll_response_option (
 			id INT AUTO_INCREMENT PRIMARY KEY,
-			poll_item_id INT,
-			option_value VARCHAR(255)
+			poll_item_id INT NOT NULL,
+			option_value VARCHAR(255) NOT NULL,
+			content VARCHAR(255) NOT NULL
 		);`)
 
     await queryRunner.query(`
 		CREATE TABLE poll_response (
 			id INT AUTO_INCREMENT PRIMARY KEY,
-			user_id INT,
-			poll_item_id INT,
-			response VARCHAR(255),
+			user_id INT NOT NULL,
+			poll_item_id INT NOT NULL,
+			content VARCHAR(255),
 			response_option_id INT,
-			start_time TIMESTAMP,
-			end_time TIMESTAMP
+			start_time TIMESTAMP NOT NULL,
+			end_time TIMESTAMP NOT NULL
 		);
 	`)
 

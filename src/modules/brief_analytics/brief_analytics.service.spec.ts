@@ -32,7 +32,7 @@ describe('BriefAnalyticsService', () => {
     provide: PollItemTypeOrmRepository,
     useFactory: (): unknown => ({
       getPollItemResponsesByBriefId: jest.fn(),
-      getById: jest.fn()
+      getById: jest.fn(),
     }),
   }
 
@@ -52,7 +52,6 @@ describe('BriefAnalyticsService', () => {
     pollResponseRepository = module.get<PollResponseTypeOrmRepository>(PollResponseTypeOrmRepository)
     pollResponseOptionRepository = module.get<PollResponseOptionTypeOrmRepository>(PollResponseOptionTypeOrmRepository)
     pollItemRepository = module.get<PollItemTypeOrmRepository>(PollItemTypeOrmRepository)
-
   })
 
   describe('aggregateMultiChoiceResponses', () => {

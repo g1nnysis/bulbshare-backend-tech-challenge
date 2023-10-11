@@ -4,10 +4,10 @@ import { PollItem } from './poll_item.entity'
 @Entity('brief')
 export class Brief {
   @PrimaryGeneratedColumn()
-  id: number
+  id!: number
 
   @Column()
-  parent_brief_id: number
+  parent_brief_id: number | null
 
   @OneToMany('poll_item', 'brief')
   pollItems: PollItem[]

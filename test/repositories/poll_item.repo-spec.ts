@@ -12,6 +12,10 @@ import { PollItemType } from '../../src/common/enums'
 import * as _ from 'lodash'
 import { clearDatabase } from '../common-helpers'
 import { PollItemNotFound } from '../../src/common/exceptions'
+import { buildBrief } from '../builders/brief.builder'
+import { buildPollItem } from '../builders/poll_item.builder'
+import { buildUser } from '../builders/user.builder'
+import { buildPollResponse } from '../builders/poll_response.builder'
 
 describe('Poll Item Repository', () => {
   let testModule: TestingModule
@@ -44,19 +48,8 @@ describe('Poll Item Repository', () => {
 
   describe('getById', () => {
     it('should get a poll item by id', async () => {
-      await briefRepository.save([
-        {
-          id: 1,
-          name: 'test_brief1',
-        },
-      ])
-
-      await pollItemRepository.save({
-        id: 1,
-        brief_id: 1,
-        type: PollItemType.OpenText,
-        question: 'Test question',
-      })
+      await briefRepository.save(buildBrief())
+      await pollItemRepository.save(buildPollItem())
 
       const result: PollItem = await pollItemRepository.getById(1)
 
@@ -64,7 +57,7 @@ describe('Poll Item Repository', () => {
         id: 1,
         brief_id: 1,
         type: PollItemType.OpenText,
-        question: 'Test question',
+        question: 'Test question?',
       })
     })
 
@@ -75,49 +68,10 @@ describe('Poll Item Repository', () => {
 
   describe('getPollItemResponsesByBriefId', () => {
     it('should get the average completion time for a brief', async () => {
-      await briefRepository.save([
-        {
-          id: 1,
-          name: 'test_brief1',
-        },
-      ])
-
-      await userRepository.save([
-        {
-          id: 1,
-          name: 'test_user1',
-        },
-        {
-          id: 2,
-          name: 'test_user2',
-        },
-      ])
-
-      await pollItemRepository.save({
-        id: 1,
-        brief_id: 1,
-        type: PollItemType.OpenText,
-        question: 'Test question',
-      })
-
-      await pollResponseRepository.save([
-        {
-          user_id: 1,
-          poll_item_id: 1,
-          response: 'Option A',
-          response_option_id: 1,
-          start_time: new Date(),
-          end_time: new Date(),
-        },
-        {
-          user_id: 2,
-          poll_item_id: 1,
-          response: 'Option A',
-          response_option_id: 1,
-          start_time: new Date(),
-          end_time: new Date(),
-        },
-      ])
+      await briefRepository.save(buildBrief())
+      await userRepository.save([buildUser(), buildUser({ id: 2 })])
+      await pollItemRepository.save(buildPollItem())
+      await pollResponseRepository.save([buildPollResponse(), buildPollResponse({ id: 2, user_id: 2 })])
 
       const result: PollItem[] = await pollItemRepository.getPollItemResponsesByBriefId(1)
 

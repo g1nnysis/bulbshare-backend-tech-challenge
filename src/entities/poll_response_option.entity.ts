@@ -5,18 +5,21 @@ import { PollResponse } from './poll_response.entity'
 @Entity('poll_response_option')
 export class PollResponseOption {
   @PrimaryGeneratedColumn()
-  id: number
+  id!: number
 
   @ManyToOne('poll_item', 'responseOptions', { onDelete: 'CASCADE' })
   @JoinColumn([{ name: 'poll_item_id', referencedColumnName: 'id' }])
   pollItem: PollItem
 
   @Column()
-  poll_item_id: number
+  poll_item_id!: number
 
   @OneToMany('poll_response', 'poll_response_option', { onDelete: 'CASCADE' })
   responses: PollResponse[]
 
   @Column()
-  option_value: string
+  option_value!: string
+
+  @Column()
+  content!: string
 }

@@ -9,6 +9,10 @@ import { User } from '../../src/entities/user.entity'
 import { PollItemType } from '../../src/common/enums'
 import * as _ from 'lodash'
 import { clearDatabase } from '../common-helpers'
+import { buildBrief } from '../builders/brief.builder'
+import { buildUser } from '../builders/user.builder'
+import { buildPollItem } from '../builders/poll_item.builder'
+import { buildPollResponse } from '../builders/poll_response.builder'
 
 describe('Poll Response Repository', () => {
   let testModule: TestingModule
@@ -41,42 +45,19 @@ describe('Poll Response Repository', () => {
 
   describe('getPollResponsesByCriteria', () => {
     it('should get poll responses and filter by criteria', async () => {
-      await briefRepository.save({
-        id: 1,
-        name: 'test_brief',
-      })
+      await briefRepository.save(buildBrief())
+      await userRepository.save(buildUser())
+      await userRepository.save(
+        buildUser({
+          id: 2,
+          age: 30,
+          country_id: 2,
+          gender: 'male',
+        })
+      )
 
-      await userRepository.save({
-        id: 1,
-        name: 'test_user',
-        age: 20,
-        country_id: 1,
-        gender: 'female',
-      })
-
-      await userRepository.save({
-        id: 2,
-        name: 'test_user',
-        age: 30,
-        country_id: 2,
-        gender: 'male',
-      })
-
-      await pollItemRepository.save({
-        id: 1,
-        brief_id: 1,
-        type: PollItemType.MultiChoice,
-        question: 'Test question',
-      })
-
-      await pollResponseRepository.save({
-        user_id: 1,
-        poll_item_id: 1,
-        response: 'Option A',
-        response_option_id: 1,
-        start_time: new Date(),
-        end_time: new Date(),
-      })
+      await pollItemRepository.save(buildPollItem())
+      await pollResponseRepository.save(buildPollResponse({}))
 
       const result = await pollResponseRepository.getPollResponsesByCriteria(1, { age: [15, 20], country: [1], gender: ['female'] })
 
@@ -85,7 +66,8 @@ describe('Poll Response Repository', () => {
         id: 1,
         user_id: 1,
         poll_item_id: 1,
-        response: 'Option A',
+        response_option_id: null,
+        content: 'Test response.',
       })
     })
   })
