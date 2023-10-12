@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { DataSource, Repository } from 'typeorm'
 import { PollResponseRepository } from './interfaces/poll_response_repository'
-import { FilterCriteria } from '../modules/brief_analytics/schema'
+import { FilterCriteria } from '../modules/brief_analytics/interfaces/schema'
 import { PollResponse } from '../entities/poll_response.entity'
 
 @Injectable()
@@ -10,10 +10,11 @@ export class PollResponseTypeOrmRepository extends Repository<PollResponse> impl
     super(PollResponse, dataSource.createEntityManager())
   }
 
-  async getPollResponsesByCriteria(pollItemId: number, filterCriteria: FilterCriteria): Promise<PollResponse[]> {
+  async getPollResponsesByCriteria(pollItemId: number, filterCriteria: FilterCriteria, briefIds: number[]): Promise<PollResponse[]> {
     const query = this.createQueryBuilder('poll_response')
       .leftJoin('poll_response.user', 'user', 'user.id = poll_response.user_id')
       .where('poll_response.poll_item_id = :pollItemId', { pollItemId })
+      .andWhere('poll_response.brief_id IN (:...briefIds)', { briefIds })
 
     if (filterCriteria.age) {
       query.andWhere('user.age BETWEEN :minAge AND :maxAge', {

@@ -40,6 +40,7 @@ export class InitialSchema1696871362358 implements MigrationInterface {
 			id INT AUTO_INCREMENT PRIMARY KEY,
 			user_id INT NOT NULL,
 			poll_item_id INT NOT NULL,
+			brief_id INT NOT NULL,
 			content VARCHAR(255),
 			response_option_id INT,
 			start_time TIMESTAMP NOT NULL,

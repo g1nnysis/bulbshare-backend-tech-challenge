@@ -56,14 +56,15 @@ describe('Poll Response Repository', () => {
       )
 
       await pollItemRepository.save(buildPollItem())
-      await pollResponseRepository.save(buildPollResponse({}))
+      await pollResponseRepository.save(buildPollResponse({ brief_id: 1 }))
 
-      const result = await pollResponseRepository.getPollResponsesByCriteria(1, { age: [15, 20], country: [1], gender: ['female'] })
+      const result = await pollResponseRepository.getPollResponsesByCriteria(1, { age: [15, 20], country: [1], gender: ['female'] }, [1])
 
       expect(result.length).toEqual(1)
       expect(_.omit(result[0], ['start_time', 'end_time'])).toEqual({
         id: 1,
         user_id: 1,
+        brief_id: 1,
         poll_item_id: 1,
         response_option_id: null,
         content: 'Test response.',

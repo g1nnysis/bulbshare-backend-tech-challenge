@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { PollResponseTypeOrmRepository } from '../../src/repositories/poll_response.repository'
 import { TypeOrmModule, getRepositoryToken } from '@nestjs/typeorm'
 import { ormConfig } from '../../src/ormconfig'
 import { PollItem } from '../../src/entities/poll_item.entity'
@@ -15,10 +14,11 @@ import { buildBrief } from '../builders/brief.builder'
 import { buildPollItem } from '../builders/poll_item.builder'
 import { buildUser } from '../builders/user.builder'
 import { buildPollResponse } from '../builders/poll_response.builder'
+import { PollResponse } from '../../src/entities/poll_response.entity'
 
 describe('Poll Item Repository', () => {
   let testModule: TestingModule
-  let pollResponseRepository: PollResponseTypeOrmRepository
+  let pollResponseRepository: Repository<PollResponse>
   let pollItemRepository: PollItemTypeOrmRepository
   let userRepository: Repository<User>
   let briefRepository: Repository<Brief>
@@ -26,14 +26,14 @@ describe('Poll Item Repository', () => {
 
   beforeAll(async () => {
     testModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forRoot(ormConfig), TypeOrmModule.forFeature([PollItem, PollResponseOption, User, Brief])],
-      providers: [PollResponseTypeOrmRepository, PollItemTypeOrmRepository],
+      imports: [TypeOrmModule.forRoot(ormConfig), TypeOrmModule.forFeature([PollItem, PollResponseOption, User, Brief, PollResponse])],
+      providers: [PollItemTypeOrmRepository],
     }).compile()
 
     userRepository = testModule.get<Repository<User>>(getRepositoryToken(User))
     briefRepository = testModule.get<Repository<Brief>>(getRepositoryToken(Brief))
     pollItemRepository = testModule.get<PollItemTypeOrmRepository>(PollItemTypeOrmRepository)
-    pollResponseRepository = testModule.get<PollResponseTypeOrmRepository>(PollResponseTypeOrmRepository)
+    pollResponseRepository = testModule.get<Repository<PollResponse>>(getRepositoryToken(PollResponse))
     dataSource = testModule.get(DataSource)
   })
 

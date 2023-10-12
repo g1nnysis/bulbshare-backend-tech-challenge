@@ -1,6 +1,6 @@
 import { PollResponse } from '../../../entities/poll_response.entity'
 import { PollResponseOption } from '../../../entities/poll_response_option.entity'
-import { AggregatedResponse } from '../dto'
+import { AggregatedResponse } from '../interfaces/dto'
 
 export function aggregateMultiChoicePollResponses(responses: PollResponse[], responseOptions: PollResponseOption[]): AggregatedResponse {
   const responseOptionsMap: Map<number, string> = new Map()

@@ -1,7 +1,7 @@
 import { mockObject } from '../../../../test/common-helpers'
 import { PollResponse } from '../../../entities/poll_response.entity'
 import { PollResponseOption } from '../../../entities/poll_response_option.entity'
-import { AggregatedResponse } from '../dto'
+import { AggregatedResponse } from '../interfaces/dto'
 import * as service from './response_aggregator'
 
 describe('Response aggregator', () => {

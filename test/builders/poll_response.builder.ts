@@ -8,6 +8,7 @@ export function buildPollResponse(overrides: DeepPartial<PollResponse> = {}): De
     poll_item_id: 1,
     content: 'Test response.',
     response_option_id: null,
+    brief_id: 1,
     start_time: new Date(),
     end_time: new Date(),
     ...overrides,

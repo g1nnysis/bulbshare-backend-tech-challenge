@@ -23,6 +23,9 @@ export class PollResponse {
   poll_item_id!: number
 
   @Column()
+  brief_id!: number
+
+  @Column()
   response_option_id: number | null
 
   @ManyToOne('poll_response_option', 'poll_response', { onDelete: 'CASCADE' })

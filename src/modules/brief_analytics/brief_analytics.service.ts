@@ -13,7 +13,8 @@ import { aggregateMultiChoicePollResponses } from './utils/response_aggregator'
 import { PollItemType } from '../../common/enums'
 import { IncompatiblePollItemType } from '../../common/exceptions'
 import { PollResponseOption } from '../../entities/poll_response_option.entity'
-import { AggregatedResponse } from './dto'
+import { AggregatedResponse } from './interfaces/dto'
+import { BriefMatcherService } from './brief_matcher.service'
 
 @Injectable()
 export class BriefAnalyticsService {
@@ -23,17 +24,19 @@ export class BriefAnalyticsService {
     @InjectRepository(PollItemTypeOrmRepository)
     private pollItemRepository: PollItemRepository,
     @InjectRepository(PollResponseOptionTypeOrmRepository)
-    private pollResponseOptionRepository: PollResponseOptionRepository
+    private pollResponseOptionRepository: PollResponseOptionRepository,
+    private briefMatcherService: BriefMatcherService
   ) {}
 
-  async aggregateMultiChoiceResponses(pollItemId: number, filterCriteria: any): Promise<AggregatedResponse> {
+  async aggregateMultiChoiceResponses(pollItemId: number, filterCriteria: any, briefId?: number): Promise<AggregatedResponse> {
     const pollItem: PollItem = await this.pollItemRepository.getById(pollItemId)
 
     if (pollItem.type !== PollItemType.MultiChoice) {
       throw new IncompatiblePollItemType()
     }
 
-    const responses: PollResponse[] = await this.pollResponseRepository.getPollResponsesByCriteria(pollItemId, filterCriteria)
+    const briefIds: number[] = await this.briefMatcherService.identifyMatchingBriefs(pollItem, briefId)
+    const responses: PollResponse[] = await this.pollResponseRepository.getPollResponsesByCriteria(pollItemId, filterCriteria, briefIds)
     const responseOptions: PollResponseOption[] = await this.pollResponseOptionRepository.getByPollItemId(pollItemId)
 
     return aggregateMultiChoicePollResponses(responses, responseOptions)

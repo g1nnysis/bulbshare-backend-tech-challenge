@@ -3,7 +3,7 @@ import { BriefAnalyticsController } from './brief_analytics.controller'
 import { BriefAnalyticsService } from './brief_analytics.service'
 import { Provider } from '@nestjs/common'
 import { mockObject } from '../../../test/common-helpers'
-import { FilterCriteria } from './schema'
+import { FilterCriteria } from './interfaces/schema'
 
 describe('BriefAnalyticsController', () => {
   let controller: BriefAnalyticsController
@@ -31,12 +31,13 @@ describe('BriefAnalyticsController', () => {
     it('should call service method with correct parameters', async () => {
       const pollItemId = 1
       const filterCriteria: FilterCriteria = mockObject()
+      const briefId = 1
 
       const aggregateMultiChoiceResponsesSpy = jest.spyOn(service, 'aggregateMultiChoiceResponses')
 
-      await controller.aggregateMultiChoice(pollItemId, filterCriteria)
+      await controller.aggregateMultiChoice(pollItemId, filterCriteria, briefId)
 
-      expect(aggregateMultiChoiceResponsesSpy).toHaveBeenCalledWith(pollItemId, filterCriteria)
+      expect(aggregateMultiChoiceResponsesSpy).toHaveBeenCalledWith(pollItemId, filterCriteria, briefId)
     })
   })
 
