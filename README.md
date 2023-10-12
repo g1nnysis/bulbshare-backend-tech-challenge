@@ -10,9 +10,13 @@ $ npm install
 ## To set up the app 
 
 ```bash
+# copy env file
 $ cp .env.example .env
-$ cp docker-compose.example.yml docker-compose.example.yml
+# copy docker-compose file
+$ cp docker-compose.example.yml docker-compose.yml
+# spins up the DB
 $ docker-compose up
+# initial migration to create the tables & constraints
 $ npm run migration:run
 ```
 
