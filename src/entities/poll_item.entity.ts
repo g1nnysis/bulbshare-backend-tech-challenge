@@ -5,14 +5,14 @@ import { PollResponseOption } from './poll_response_option.entity'
 
 @Entity('poll_item')
 export class PollItem {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number
 
   @ManyToOne('brief', 'poll_item')
   @JoinColumn([{ name: 'brief_id', referencedColumnName: 'id' }])
   brief!: Brief
 
-  @Column()
+  @Column({ type: 'integer', nullable: false })
   brief_id!: number
 
   @Column({
@@ -21,7 +21,7 @@ export class PollItem {
   })
   type!: string
 
-  @Column('text')
+  @Column({ type: 'varchar', length: 255, nullable: false })
   question!: string
 
   @OneToMany('poll_item', 'poll_response_option')

@@ -3,16 +3,16 @@ import { PollResponse } from './poll_response.entity'
 
 @Entity('user')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number
 
-  @Column()
+  @Column({ type: 'integer', nullable: false })
   age!: number
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   gender!: string
 
-  @Column()
+  @Column({ type: 'integer', nullable: false })
   country_id!: number
 
   @OneToMany(() => PollResponse, pollResponse => pollResponse.user)
