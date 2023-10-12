@@ -1,5 +1,5 @@
 ## Dependencies
-This project uses Node.js v20.8.0 (npm 10.1.0). It might not work with other versions. If you are using different versions of Node on your computer please consider using nvm. 
+This project uses Node.js v20.8.0 (npm 10.1.0). It might not work with other versions. If you are using different versions of Node on your computer please consider using nvm (https://github.com/nvm-sh/nvm/blob/master/README.md).
 
 ## Installation
 
