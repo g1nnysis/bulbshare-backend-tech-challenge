@@ -16,10 +16,11 @@ export function IsAgeValid(validationOptions?: ValidationOptions) {
           }
 
           const [start, end] = value
-          return isNumber(start) && isNumber(end) && isPositive(start) && isPositive(end) && start >= end
+
+          return isNumber(start) && isNumber(end) && isPositive(start) && isPositive(end) && start <= end
         },
         defaultMessage(_validationArguments?: ValidationArguments) {
-          return 'The first element of age should be greater than or equal to the second element.'
+          return 'The second element of age should be greater than or equal to the first element.'
         },
       },
     })

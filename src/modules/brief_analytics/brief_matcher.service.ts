@@ -13,8 +13,10 @@ export class BriefMatcherService {
     private briefRepository: BriefRepository
   ) {}
 
-  async identifyMatchingBriefs(pollItem: PollItem, briefId?: number): Promise<number[]> {
-    if (pollItem.brief_id === briefId) return [briefId] // user wants results only for parent brief
+  async identifyMatchingBriefs(pollItem: PollItem, briefId?: string): Promise<number[]> {
+    const parsedBriefId: number = parseInt(briefId, 10)
+
+    if (pollItem.brief_id === parsedBriefId) return [parsedBriefId] // user wants results only for parent brief
 
     const allBriefs: Brief[] = await this.briefRepository.getAllBriefsForParent(pollItem.brief_id)
 
@@ -23,7 +25,7 @@ export class BriefMatcherService {
       return allBriefs.map(brief => brief.id)
     }
 
-    const clonedBrief: Brief | undefined = allBriefs.find(brief => brief.id === briefId) // user wants results for a specific brief, which is not the parent brief
+    const clonedBrief: Brief | undefined = allBriefs.find(brief => brief.id === parsedBriefId) // user wants results for a specific brief which is not the parent brief
     if (clonedBrief !== undefined) return [clonedBrief.id]
 
     throw new PollItemNotFound() // poll item does not belong to the parent brief or any of the cloned briefs

@@ -1,24 +1,11 @@
 version: "3.8"
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:latest
     command: --sql_mode=NO_ENGINE_SUBSTITUTION
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_DATABASE: bulbshare-tech-challenge
+      MYSQL_ROOT_PASSWORD: 'root'
     restart: always
-    environment: 
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
-  # app:
-  #   build: .
-  #   environment:
-  #     MYSQL_DATABASE: test
-  #     MYSQL_USER: root
-  #     MYSQL_PASSWORD: password
-  #     MYSQL_HOST: db
-  #   ports:
-  #     - "3000:000"
-  #   depends_on:
-  #     - mysql
-  #   restart: on-failure

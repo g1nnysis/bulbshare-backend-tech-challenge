@@ -3,17 +3,13 @@ module.exports = {
   moduleFileExtensions: ["js", "json", "ts"],
   rootDir: ".",
   testEnvironment: "node",
-  testRegex: "\\.repo-spec\\.ts$",
+  testRegex: "\\.e2e-spec\\.ts$",
   setupFiles: ["dotenv/config"],
   setupFilesAfterEnv: ["jest-extended/all"],
-  globalSetup: "./test/repo-tests.setup.ts",
   modulePaths: ["<rootDir>"],
   transform: {
     "^.+\\.(t)s$": "ts-jest"
   },
-  collectCoverageFrom: [
-    "src/repositories/*.(t|j)s"
-  ],
   coverageDirectory: "../coverage",
   coverageThreshold: {
     global: {
@@ -24,4 +20,4 @@ module.exports = {
     }
   },
   watchPathIgnorePatterns: ["node_modules"]
-};
+}

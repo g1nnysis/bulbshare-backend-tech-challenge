@@ -28,7 +28,7 @@ export class BriefAnalyticsService {
     private briefMatcherService: BriefMatcherService
   ) {}
 
-  async aggregateMultiChoiceResponses(pollItemId: number, filterCriteria: any, briefId?: number): Promise<AggregatedResponse> {
+  async aggregateMultiChoiceResponses(pollItemId: number, filterCriteria: any, briefId?: string): Promise<AggregatedResponse> {
     const pollItem: PollItem = await this.pollItemRepository.getById(pollItemId)
 
     if (pollItem.type !== PollItemType.MultiChoice) {

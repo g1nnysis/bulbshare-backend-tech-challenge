@@ -14,13 +14,14 @@ import { BriefTypeOrmRepository } from '../../repositories/brief.repository'
 
 @Module({
   imports: [TypeOrmModule.forFeature([PollResponse, PollItem, PollResponseOption, Brief])],
-  providers: [BriefAnalyticsService, BriefMatcherService],
-  controllers: [
-    BriefAnalyticsController,
+  providers: [
+    BriefAnalyticsService,
+    BriefMatcherService,
     PollResponseTypeOrmRepository,
     PollItemTypeOrmRepository,
     PollResponseOptionTypeOrmRepository,
     BriefTypeOrmRepository,
   ],
+  controllers: [BriefAnalyticsController],
 })
 export class BriefAnalyticsModule {}

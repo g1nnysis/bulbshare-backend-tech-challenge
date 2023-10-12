@@ -9,15 +9,3 @@ services:
       MYSQL_DATABASE: bulbshare-tech-challenge
       MYSQL_ROOT_PASSWORD: 'root'
     restart: always
-  # app:
-  #   build: .
-  #   environment:
-  #     MYSQL_DATABASE: test
-  #     MYSQL_USER: root
-  #     MYSQL_PASSWORD: password
-  #     MYSQL_HOST: db
-  #   ports:
-  #     - "3000:000"
-  #   depends_on:
-  #     - mysql
-  #   restart: on-failure

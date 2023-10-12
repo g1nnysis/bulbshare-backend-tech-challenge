@@ -7,3 +7,7 @@ export interface FilterCriteria {
 export interface AggregatedResponse {
   [option: string]: number
 }
+
+export interface AverageCompletionResponse {
+  average: number
+}

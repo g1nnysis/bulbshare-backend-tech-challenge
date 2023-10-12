@@ -72,7 +72,7 @@ describe('BriefAnalyticsService', () => {
       const responses: PollResponse[] = [mockObject()]
       const responseOptions: PollResponseOption[] = [mockObject()]
       const expectedResult: AggregatedResponse = mockObject()
-      const briefId: number = 1
+      const briefId: string = '1'
       const briefIds: number[] = [1]
 
       const getById: jest.SpyInstance = jest.spyOn(pollItemRepository, 'getById')

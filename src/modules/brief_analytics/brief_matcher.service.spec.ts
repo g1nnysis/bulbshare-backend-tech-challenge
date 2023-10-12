@@ -31,12 +31,11 @@ describe('BriefMatcherService', () => {
   describe('identifyMatchingBriefs', () => {
     const parentBriefId: number = 1
     const linkedBrief1: number = 2
-    const linkedBrief2: number = 3
 
     it('should return the briefId, if input briefId is defined and matches the one on the pollItem', async () => {
       const pollItem: PollItem = mockObject({ brief_id: parentBriefId })
 
-      const result = await service.identifyMatchingBriefs(pollItem, parentBriefId)
+      const result = await service.identifyMatchingBriefs(pollItem, '1')
 
       expect(result).toEqual([parentBriefId])
     })
@@ -60,7 +59,7 @@ describe('BriefMatcherService', () => {
 
       when(getAllBriefsForParent).expectCalledWith(parentBriefId).mockReturnValueOnce(briefs)
 
-      const result = await service.identifyMatchingBriefs(pollItem, linkedBrief1)
+      const result = await service.identifyMatchingBriefs(pollItem, '2')
 
       expect(result).toEqual([linkedBrief1])
     })
@@ -72,7 +71,7 @@ describe('BriefMatcherService', () => {
 
       when(getAllBriefsForParent).expectCalledWith(parentBriefId).mockReturnValueOnce(briefs)
 
-      await expect(service.identifyMatchingBriefs(pollItem, linkedBrief2)).rejects.toThrow(PollItemNotFound)
+      await expect(service.identifyMatchingBriefs(pollItem, '3')).rejects.toThrow(PollItemNotFound)
     })
   })
 })

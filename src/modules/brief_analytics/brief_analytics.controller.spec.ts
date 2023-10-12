@@ -31,7 +31,7 @@ describe('BriefAnalyticsController', () => {
     it('should call service method with correct parameters', async () => {
       const pollItemId = 1
       const filterCriteria: FilterCriteria = mockObject()
-      const briefId = 1
+      const briefId = '1'
 
       const aggregateMultiChoiceResponsesSpy = jest.spyOn(service, 'aggregateMultiChoiceResponses')
 
